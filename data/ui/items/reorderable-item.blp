@@ -1,0 +1,22 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ReorderableItem : Adw.ActionRow {
+    title: _("Row 1");
+    
+    [prefix]
+    Image {
+        styles [ "dim-label" ]
+        
+        icon-name: "list-drag-handle-symbolic";
+    }
+    
+    [suffix]
+    Button {
+        icon-name: "edit-delete-symbolic";
+        valign: center;
+        
+        styles [ "flat" ]
+        clicked => $on_delete_clicked();
+    }
+}

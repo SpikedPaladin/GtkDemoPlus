@@ -1,0 +1,28 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ReorderablePage : Adw.Window {
+    title: "Reorderable List";
+    
+    Box {
+        orientation: vertical;
+        
+        Adw.HeaderBar {
+            
+            Button {
+                icon-name: "list-add-symbolic";
+                clicked => $on_add_clicked();
+            }
+        }
+        
+        Adw.Clamp {
+            maximum-size: 400;
+            vexpand: true;
+            valign: center;
+
+            ListBox list {
+                styles [ "boxed-list" ]
+            }
+        }
+    }
+}

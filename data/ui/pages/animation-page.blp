@@ -1,0 +1,93 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AnimationPage : Adw.Window {
+    title: "Animation";
+    
+    Box {
+        orientation: vertical;
+        
+        Adw.HeaderBar {}
+        
+        Fixed fixed {
+            width-request: 600;
+            height-request: 600;
+            
+            Frame frame {
+                width-request: 200;
+                height-request: 200;
+                
+                styles ["front"]
+            }
+        }
+        
+        Scale {
+            orientation: horizontal;
+            width-request: 130;
+            draw-value: true;
+
+            adjustment: x;
+        }
+        
+        Scale {
+            orientation: horizontal;
+            width-request: 130;
+            draw-value: true;
+
+            adjustment: y;
+        }
+        
+        Scale {
+            orientation: horizontal;
+            width-request: 130;
+            draw-value: true;
+
+            adjustment: pers;
+        }
+        
+        Scale {
+            orientation: horizontal;
+            width-request: 130;
+            draw-value: true;
+
+            adjustment: rot_y;
+        }
+        
+        Button {
+            label: "Start animation";
+            
+            clicked => $start_animation();
+        }
+    }
+}
+
+Gtk.Adjustment x {
+    lower: 0;
+    upper: 400;
+    value: 0;
+    
+    value-changed => $on_apply();
+}
+
+Gtk.Adjustment y {
+    lower: 0;
+    upper: 400;
+    value: 0;
+    
+    value-changed => $on_apply();
+}
+Gtk.Adjustment pers {
+    lower: 0;
+    upper: 600;
+    value: 0;
+    
+    value-changed => $on_apply();
+}
+
+Gtk.Adjustment rot_y {
+    lower: 0;
+    upper: 360;
+    value: 0;
+    
+    value-changed => $on_apply();
+}

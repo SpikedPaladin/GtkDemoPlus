@@ -1,0 +1,15 @@
+using Gtk 4.0;
+
+template ListItem {
+    focusable: false;
+    
+    child: TreeExpander expander {
+        list-row: bind template.item;
+        
+        child: Inscription {
+            hexpand: true;
+            
+            text: bind expander.item as <$Demo>.title;
+        };
+    };
+}

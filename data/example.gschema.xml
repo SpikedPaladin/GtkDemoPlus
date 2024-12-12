@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema path="/me/paladin/Example/" id="me.paladin.Example">
+    <key name="list-items" type="a(ss)">
+      <default>[('Item 1', 'Description'), ('Item 2', 'Description')]</default>
+      <summary>Reorderable List Items</summary>
+    </key>
+  </schema>
+</schemalist>

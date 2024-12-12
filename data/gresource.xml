@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+    <gresource prefix="/me/paladin/Example">
+        <file>style.css</file>
+        
+        <!-- Main Window -->
+        <file alias="main-listitem.ui" preprocess="xml-stripblanks">ui/main-listitem.ui</file>
+        <file alias="main-window.ui" preprocess="xml-stripblanks">ui/main-window.ui</file>
+        <file alias="notebook.ui" preprocess="xml-stripblanks">ui/notebook.ui</file>
+        
+        <!-- Animation Page -->
+        <file alias="animation-page.ui" preprocess="xml-stripblanks">ui/pages/animation-page.ui</file>
+        
+        <!-- Reorderable List Page -->
+        <file alias="reorderable-page.ui" preprocess="xml-stripblanks">ui/pages/reorderable-page.ui</file>
+        <file alias="add-item-dialog.ui" preprocess="xml-stripblanks">ui/dialogs/add-item-dialog.ui</file>
+        <file alias="reorderable-item.ui" preprocess="xml-stripblanks">ui/items/reorderable-item.ui</file>
+        
+        <!-- Transition Page -->
+        <file alias="transition-page.ui" preprocess="xml-stripblanks">ui/pages/transition-page.ui</file>
+    </gresource>
+</gresources>

@@ -1,0 +1,36 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AddItemDialog : Adw.Dialog {
+    title: "Add Item";
+    
+    Box {
+        orientation: vertical;
+        
+        Adw.HeaderBar {}
+        
+        Box {
+            margin-end: 12;
+            margin-top: 12;
+            margin-start: 12;
+            margin-bottom: 12;
+            spacing: 12;
+            
+            orientation: vertical;
+            
+            Entry title_entry {
+                placeholder-text: "Title";
+            }
+            
+            Entry subtitle_entry {
+                placeholder-text: "Subtitle";
+            }
+            
+            Button {
+                label: "Add";
+                
+                clicked => $on_add_clicked();
+            }
+        }
+    }
+}
