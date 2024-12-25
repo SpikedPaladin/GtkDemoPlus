@@ -5,5 +5,6 @@ sources += files(
     'transition-page.vala',
     'shadertoy.vala',
     'translations.vala',
-    'interactive-map.vala'
+    'interactive-map.vala',
+    'async-image.vala'
 )

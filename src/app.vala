@@ -24,9 +24,10 @@ public class Example : Adw.Application {
             main_window.present();
             return;
         }
-        typeof(TransitionPage).ensure();
-        main_window = new MainWindow(this);
         
+        MainWindow.ensure_pages();
+        
+        main_window = new MainWindow(this);
         main_window.present();
     }
     

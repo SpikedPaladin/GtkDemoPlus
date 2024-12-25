@@ -3,6 +3,8 @@ public unowned Adw.NavigationView nav;
 [GtkTemplate (ui = "/me/paladin/Example/main-window.ui")]
 public class MainWindow : Adw.ApplicationWindow {
     [GtkChild]
+    private unowned Adw.NavigationView nav_view;
+    [GtkChild]
     private unowned Gtk.ListView listview;
     [GtkChild]
     private unowned Adw.NavigationPage content_page;
@@ -17,6 +19,8 @@ public class MainWindow : Adw.ApplicationWindow {
     
     public MainWindow(Gtk.Application app) {
         Object(application: app);
+        
+        nav = nav_view;
         
         var action = new SimpleAction("run", null);
         action.activate.connect(on_run);
@@ -170,6 +174,23 @@ public class MainWindow : Adw.ApplicationWindow {
         
         sub_store.append(demo);
         
+        demo = new Demo() {
+            name = "async",
+            title = "Async Image"
+        };
+        demo.func = () => nav.push_by_tag("async_image");
+        
+        sub_store.append(demo);
+        
         return store;
+    }
+    
+    /**
+     * Required to ensure pages types
+     * are registered in GObject system
+     */
+    public static void ensure_pages() {
+        typeof(TransitionPage).ensure();
+        typeof(AsyncImagePage).ensure();
     }
 }

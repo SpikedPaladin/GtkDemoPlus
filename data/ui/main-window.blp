@@ -6,65 +6,74 @@ template $MainWindow : Adw.ApplicationWindow {
     default-width: 800;
     default-height: 700;
     
-    Adw.NavigationSplitView {
-        sidebar: Adw.NavigationPage {
-            title: "Gtk Demo+";
-            
-            Adw.ToolbarView {
-                
-                [top]
-                Adw.HeaderBar {
-                    [start]
-                    Button {
-                        icon-name: "media-playback-start-symbolic";
-                        action-name: "win.run";
-                        focus-on-click: false;
-                    }
-                    
-                    [end]
-                    ToggleButton {
-                        icon-name: "edit-find-symbolic";
-                        focus-on-click: false;
-                        
-                        active: bind searchbar.search-mode-enabled bidirectional;
-                    }
-                }
-                
-                Box {
-                    orientation: vertical;
-                    
-                    SearchBar searchbar {
-                        
-                        SearchEntry search_entry {
-                            search-changed => $search_changed();
-                        }
-                    }
-                    
-                    ScrolledWindow {
-                        vexpand: true;
-                        
-                        ListView listview {
-                            styles ["navigation-sidebar"]
-                            
-                            factory: BuilderListItemFactory {
-                                resource: "/me/paladin/Example/main-listitem.ui";
-                            };
-                        }
-                    }
-                }
-            }
-        };
+    Adw.NavigationView nav_view {
         
-        content: Adw.NavigationPage content_page {
-            title: "Content";
+        Adw.NavigationPage {
+            tag: "main";
             
-            Adw.ToolbarView {
-                [top]
-                Adw.HeaderBar {}
+            Adw.NavigationSplitView {
+                sidebar: Adw.NavigationPage {
+                    title: "Gtk Demo+";
+                    
+                    Adw.ToolbarView {
+                        
+                        [top]
+                        Adw.HeaderBar {
+                            [start]
+                            Button {
+                                icon-name: "media-playback-start-symbolic";
+                                action-name: "win.run";
+                                focus-on-click: false;
+                            }
+                            
+                            [end]
+                            ToggleButton {
+                                icon-name: "edit-find-symbolic";
+                                focus-on-click: false;
+                                
+                                active: bind searchbar.search-mode-enabled bidirectional;
+                            }
+                        }
+                        
+                        Box {
+                            orientation: vertical;
+                            
+                            SearchBar searchbar {
+                                
+                                SearchEntry search_entry {
+                                    search-changed => $search_changed();
+                                }
+                            }
+                            
+                            ScrolledWindow {
+                                vexpand: true;
+                                
+                                ListView listview {
+                                    styles ["navigation-sidebar"]
+                                    
+                                    factory: BuilderListItemFactory {
+                                        resource: "/me/paladin/Example/main-listitem.ui";
+                                    };
+                                }
+                            }
+                        }
+                    }
+                };
                 
-                $Notebook notebook {}
+                content: Adw.NavigationPage content_page {
+                    title: "Content";
+                    
+                    Adw.ToolbarView {
+                        [top]
+                        Adw.HeaderBar {}
+                        
+                        $Notebook notebook {}
+                    }
+                };
             }
-        };
+        }
+        
+        $AsyncImagePage async_page {}
     }
 }
 

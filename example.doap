@@ -6,7 +6,7 @@
     xmlns:gnome="http://api.gnome.org/doap-extensions#"
     xmlns="http://usefulinc.com/ns/doap#">
     
-    <name xml:lang="en">Playground</name>
+    <name xml:lang="en">GtkDemo+</name>
     <shortdesc xml:lang="en">Template project</shortdesc>
     <description xml:lang="en">Template project with libadwaita, vala and blueprints</description>
     <homepage rdf:resource="https://github.com/SpikedPaladin/ValaGtkTemplate"/>
