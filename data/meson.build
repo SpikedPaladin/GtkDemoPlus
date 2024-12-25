@@ -1,16 +1,4 @@
-blueprints = files(
-    'ui/main-listitem.blp',
-    'ui/main-window.blp',
-    'ui/notebook.blp',
-    
-    'ui/dialogs/add-item-dialog.blp',
-    
-    'ui/items/reorderable-item.blp',
-    
-    'ui/pages/animation-page.blp',
-    'ui/pages/reorderable-page.blp',
-    'ui/pages/transition-page.blp',
-)
+subdir('ui')
 
 blp_target = custom_target(
     'blueprints',
