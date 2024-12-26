@@ -159,10 +159,10 @@ public class MainWindow : Adw.ApplicationWindow {
         sub_store.append(demo);
         
         demo = new Demo() {
-            name = "translation",
+            name = "translations",
             title = "Translations"
         };
-        demo.func = () => new Translations().present();
+        demo.func = () => nav.push_by_tag("translations");
         
         sub_store.append(demo);
         
@@ -191,6 +191,7 @@ public class MainWindow : Adw.ApplicationWindow {
      */
     public static void ensure_pages() {
         typeof(TransitionPage).ensure();
+        typeof(TranslationsPage).ensure();
         typeof(AsyncImagePage).ensure();
     }
 }

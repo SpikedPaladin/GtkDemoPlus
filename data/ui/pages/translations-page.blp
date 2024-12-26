@@ -1,0 +1,38 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $TranslationsPage : Adw.NavigationPage {
+    tag: "translations";
+    title: "Translations";
+    
+    Box {
+        orientation: vertical;
+        
+        Adw.HeaderBar {
+            
+            [end]
+            Box {
+                orientation: horizontal;
+                
+                styles [ "linked" ]
+                
+                ToggleButton en {
+                    label: "EN";
+                    active: true;
+                }
+                
+                ToggleButton ru {
+                    label: "RU";
+                    group: en;
+                }
+            }
+        }
+        
+        Label label {
+            valign: center;
+            vexpand: true;
+            
+            styles [ "title-1" ]
+        }
+    }
+}
