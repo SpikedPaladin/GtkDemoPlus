@@ -2,12 +2,16 @@ public class Translations : Adw.Window {
     public string lang { get; set; default = "ru"; }
     public HashTable<string, string> russian = new HashTable<string, string>(str_hash, str_equal);
     public HashTable<string, string> english = new HashTable<string, string>(str_hash, str_equal);
-    public HashTable<string, string> translations;
+    public HashTable<string, string> translations {
+        get {
+            if (lang == "ru") return russian;
+            else return english;
+        }
+    }
     
     construct {
         russian["test"] = "Привет";
         
-        translations = russian;
         english["test"] = "Hello";
         var box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
         
@@ -20,10 +24,8 @@ public class Translations : Adw.Window {
         var eng = new Gtk.ToggleButton.with_label("EN");
         eng.toggled.connect(() => {
             if (eng.active) {
-                translations = english;
                 lang = "en";
             } else {
-                translations = russian;
                 lang = "ru";
             }
         });
