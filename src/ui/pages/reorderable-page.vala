@@ -1,5 +1,5 @@
 [GtkTemplate (ui = "/me/paladin/Example/reorderable-page.ui")]
-public class ReorderablePage : Adw.Window {
+public class ReorderablePage : Adw.NavigationPage {
     [GtkChild]
     private unowned Gtk.ListBox list;
     private ListStore store = new ListStore(typeof(TestItem));

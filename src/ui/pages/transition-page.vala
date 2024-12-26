@@ -1,5 +1,5 @@
 [GtkTemplate (ui = "/me/paladin/Example/transition-page.ui")]
-public class TransitionPage : Adw.Window {
+public class TransitionPage : Adw.NavigationPage {
     
     construct {
         var widget = new DemoWidget();
@@ -20,7 +20,7 @@ public class TransitionPage : Adw.Window {
             widget.add_child(child);
         }
         
-        content = widget;
+        child = widget;
     }
 }
 
@@ -51,7 +51,7 @@ public class DemoLayout : Gtk.LayoutManager {
             child.measure(orientation, -1, out child_min, out child_nat, null, null);
             
             minimum_size = int.max(minimum_size, child_min);
-            minimum_size = int.max(natural_size, child_nat);
+            natural_size = int.max(natural_size, child_nat);
         }
         
         min = (int) (16 * minimum_size / Math.PI + minimum_size);

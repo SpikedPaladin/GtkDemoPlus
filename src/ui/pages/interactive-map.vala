@@ -1,9 +1,10 @@
-public class InteractiveMapWindow : Adw.Window {
+public class InteractiveMapPage : Adw.NavigationPage {
     
     construct {
-        content = new InteractiveMap();
+        tag = "interactive-map";
+        title = "Interactive Map";
         
-        set_size_request(600, 600);
+        child = new InteractiveMap();
     }
 }
 

@@ -1,5 +1,5 @@
 [GtkTemplate (ui = "/me/paladin/Example/animation-page.ui")]
-public class AnimationPage : Adw.Window {
+public class AnimationPage : Adw.NavigationPage {
     [GtkChild]
     private unowned Gtk.Fixed fixed;
     [GtkChild]

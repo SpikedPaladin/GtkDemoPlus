@@ -120,59 +120,36 @@ public class MainWindow : Adw.ApplicationWindow {
         };
         var sub_store = new ListStore(typeof(Demo));
         data.children_model = sub_store;
-        var demo = new Demo() {
-            tag = "transition",
-            title = "Transition"
-        };
-        demo.func = () => new AnimationPage().present();
-        sub_store.append(demo);
         store.append(data);
         
-        demo = new Demo() {
-            tag = "reorder",
+        sub_store.append(new Demo() {
+            tag = "animation",
+            title = "Animation"
+        });
+        sub_store.append(new Demo() {
+            tag = "reorderable",
             title = "Reorderable List"
-        };
-        demo.func = () => new ReorderablePage().present();
-        
-        sub_store.append(demo);
-        
-        demo = new Demo() {
+        });
+        sub_store.append(new Demo() {
             tag = "transition",
             title = "Transition"
-        };
-        demo.func = () => new TransitionPage().present();
-        
-        sub_store.append(demo);
-        
-        demo = new Demo() {
+        });
+        sub_store.append(new Demo() {
             tag = "blur",
             title = "Blur Overlay"
-        };
-        demo.func = () => new BlurWindow().present();
-        
-        sub_store.append(demo);
-        
-        demo = new Demo() {
-            tag = "stoy",
+        });
+        sub_store.append(new Demo() {
+            tag = "shader-toy",
             title = "ShaderToy"
-        };
-        demo.func = () => new ShaderToyWindow().present();
-        
-        sub_store.append(demo);
-        
+        });
         sub_store.append(new Demo() {
             tag = "translations",
             title = "Translations"
         });
-        
-        demo = new Demo() {
-            tag = "intmap",
+        sub_store.append(new Demo() {
+            tag = "interactive-map",
             title = "Interactive Map"
-        };
-        demo.func = () => new InteractiveMapWindow().present();
-        
-        sub_store.append(demo);
-        
+        });
         sub_store.append(new Demo() {
             tag = "async_image",
             title = "Async Image"
@@ -186,6 +163,12 @@ public class MainWindow : Adw.ApplicationWindow {
      * are registered in GObject system
      */
     public static void ensure_pages() {
+        typeof(AnimationPage).ensure();
+        typeof(TransitionPage).ensure();
+        typeof(ShaderToyPage).ensure();
+        typeof(BlurPage).ensure();
+        typeof(InteractiveMapPage).ensure();
+        typeof(ReorderablePage).ensure();
         typeof(TransitionPage).ensure();
         typeof(TranslationsPage).ensure();
         typeof(AsyncImagePage).ensure();

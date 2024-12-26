@@ -1,5 +1,9 @@
-public class ShaderToyWindow : Adw.Window {
+public class ShaderToyPage : Adw.NavigationPage {
+    
     construct {
+        tag = "shader-toy";
+        title = "ShaderToy";
+        
         var overlay = new Gtk.Overlay();
         overlay.child = new ShaderToy();
         var box = new Gtk.Box(Gtk.Orientation.VERTICAL, 10);
@@ -9,7 +13,7 @@ public class ShaderToyWindow : Adw.Window {
         });
         overlay.add_overlay(box);
         
-        content = overlay;
+        child = overlay;
     }
 }
 

@@ -1,7 +1,9 @@
-public class BlurWindow : Adw.Window {
+public class BlurPage : Adw.NavigationPage {
     
     construct {
-        content = new BlurOverlay();
+        tag = "blur";
+        title = "Blur";
+        child = new BlurOverlay();
     }
 }
 
@@ -11,7 +13,7 @@ public class BlurOverlay : Gtk.Box {
     
     construct {
         box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
-        box.append(button = new Gtk.Button.with_label("Hui"));
+        box.append(button = new Gtk.Button.with_label("Not working rn"));
         append(box);
     }
     
