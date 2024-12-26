@@ -12,6 +12,7 @@
         <file alias="animation-page.ui" preprocess="xml-stripblanks">ui/pages/animation-page.ui</file>
         
         <!-- Reorderable List Page -->
+        <file alias="async-image-page.ui" preprocess="xml-stripblanks">ui/pages/async-image-page.ui</file>
         <file alias="reorderable-page.ui" preprocess="xml-stripblanks">ui/pages/reorderable-page.ui</file>
         <file alias="add-item-dialog.ui" preprocess="xml-stripblanks">ui/dialogs/add-item-dialog.ui</file>
         <file alias="reorderable-item.ui" preprocess="xml-stripblanks">ui/items/reorderable-item.ui</file>

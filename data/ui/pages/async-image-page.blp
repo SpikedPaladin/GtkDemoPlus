@@ -1,0 +1,43 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AsyncImagePage : Adw.NavigationPage {
+    tag: "async_image";
+    title: "Async Image";
+    
+    Box {
+        orientation: vertical;
+        
+        Adw.HeaderBar {}
+        
+        Box {
+            orientation: vertical;
+            
+            Button {
+                label: "Big";
+                
+                clicked => $load_big();
+            }
+            
+            Button {
+                label: "Vala";
+                
+                clicked => $load_vala();
+            }
+            
+            Adw.Spinner {}
+            
+            Box {
+                orientation: horizontal;
+                vexpand: true;
+                
+                Frame {
+                    height-request: 90;
+                    width-request: 180;
+                    
+                    $AsyncImage img {}
+                }
+            }
+        }
+    }
+}
