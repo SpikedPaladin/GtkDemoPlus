@@ -6,7 +6,7 @@ public class Notebook : Gtk.Box {
     private unowned Gtk.Stack stack;
     
     public void open(Demo demo) {
-        if (demo.name == "main") {
+        if (demo.tag == "main") {
             
         }
     }

@@ -98,7 +98,7 @@ public class MainWindow : Adw.ApplicationWindow {
         }
         
         var demo = get_selected_item();
-        action.set_enabled(demo.func != null);
+        action.set_enabled(demo.has_page);
         content_page.title = demo.title;
         
         notebook.open(demo);
@@ -108,18 +108,20 @@ public class MainWindow : Adw.ApplicationWindow {
         var store = new ListStore(typeof(Demo));
         
         store.append(new Demo() {
-            name = "main",
-            title = "GTK Demo+"
+            tag = "main",
+            title = "GTK Demo+",
+            has_page = false
         });
         
         var data = new Demo() {
-            name = "sub",
+            tag = "sub",
             title = "Other",
+            has_page = false
         };
         var sub_store = new ListStore(typeof(Demo));
         data.children_model = sub_store;
         var demo = new Demo() {
-            name = "transition",
+            tag = "transition",
             title = "Transition"
         };
         demo.func = () => new AnimationPage().present();
@@ -127,7 +129,7 @@ public class MainWindow : Adw.ApplicationWindow {
         store.append(data);
         
         demo = new Demo() {
-            name = "reorder",
+            tag = "reorder",
             title = "Reorderable List"
         };
         demo.func = () => new ReorderablePage().present();
@@ -135,7 +137,7 @@ public class MainWindow : Adw.ApplicationWindow {
         sub_store.append(demo);
         
         demo = new Demo() {
-            name = "transition",
+            tag = "transition",
             title = "Transition"
         };
         demo.func = () => new TransitionPage().present();
@@ -143,7 +145,7 @@ public class MainWindow : Adw.ApplicationWindow {
         sub_store.append(demo);
         
         demo = new Demo() {
-            name = "blur",
+            tag = "blur",
             title = "Blur Overlay"
         };
         demo.func = () => new BlurWindow().present();
@@ -151,36 +153,30 @@ public class MainWindow : Adw.ApplicationWindow {
         sub_store.append(demo);
         
         demo = new Demo() {
-            name = "stoy",
+            tag = "stoy",
             title = "ShaderToy"
         };
         demo.func = () => new ShaderToyWindow().present();
         
         sub_store.append(demo);
         
-        demo = new Demo() {
-            name = "translations",
+        sub_store.append(new Demo() {
+            tag = "translations",
             title = "Translations"
-        };
-        demo.func = () => nav.push_by_tag("translations");
-        
-        sub_store.append(demo);
+        });
         
         demo = new Demo() {
-            name = "intmap",
+            tag = "intmap",
             title = "Interactive Map"
         };
         demo.func = () => new InteractiveMapWindow().present();
         
         sub_store.append(demo);
         
-        demo = new Demo() {
-            name = "async",
+        sub_store.append(new Demo() {
+            tag = "async_image",
             title = "Async Image"
-        };
-        demo.func = () => nav.push_by_tag("async_image");
-        
-        sub_store.append(demo);
+        });
         
         return store;
     }
