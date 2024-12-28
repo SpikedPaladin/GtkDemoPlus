@@ -2,6 +2,7 @@
 <gresources>
     <gresource prefix="/me/paladin/Example">
         <file>style.css</file>
+        <file>sticker.webp</file>
         
         <!-- Main Window -->
         <file alias="main-listitem.ui" preprocess="xml-stripblanks">ui/main-listitem.ui</file>

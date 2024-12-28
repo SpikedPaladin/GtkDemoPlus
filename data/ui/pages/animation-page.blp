@@ -8,17 +8,18 @@ template $AnimationPage : Adw.NavigationPage {
     Box {
         orientation: vertical;
         
+        styles [ "anim-box" ]
+        
         Adw.HeaderBar {}
         
         Fixed fixed {
             width-request: 600;
             height-request: 600;
             
-            Frame frame {
-                width-request: 200;
-                height-request: 200;
-                
-                styles ["front"]
+            Image image {
+                width-request: 300;
+                height-request: 300;
+                resource: "/me/paladin/Example/sticker.webp";
             }
         }
         
@@ -65,7 +66,7 @@ template $AnimationPage : Adw.NavigationPage {
 Gtk.Adjustment x {
     lower: 0;
     upper: 400;
-    value: 0;
+    value: 150;
     
     value-changed => $on_apply();
 }
@@ -73,14 +74,14 @@ Gtk.Adjustment x {
 Gtk.Adjustment y {
     lower: 0;
     upper: 400;
-    value: 0;
+    value: 150;
     
     value-changed => $on_apply();
 }
 Gtk.Adjustment pers {
     lower: 0;
-    upper: 600;
-    value: 0;
+    upper: 1000;
+    value: 600;
     
     value-changed => $on_apply();
 }

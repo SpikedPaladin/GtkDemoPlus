@@ -1,6 +1,6 @@
 frame.front {
-  border: 2px solid white;
-  background-color: rgba(228, 0, 0, 0.8);
+    border: 2px solid white;
+    background-color: rgba(228, 0, 0, 0.8);
 }
 
 box.blur {
@@ -13,4 +13,8 @@ box.blur {
 .blur-card {
     border-radius: 20px;
     background: alpha(white, 0.5);
+}
+
+.anim-box scale {
+    padding-top: 0;
 }
