@@ -8,10 +8,25 @@ template $BlurPage : Adw.NavigationPage {
     Box {
         orientation: vertical;
         
-        Adw.HeaderBar {}
+        Adw.HeaderBar {
+            
+            [end]
+            SpinButton blur_amount {
+                orientation: horizontal;
+                
+                adjustment: Adjustment {
+                    lower: 0;
+                    upper: 50;
+                    step-increment: 1;
+                    value: 5;
+                };
+            }
+        }
         
         $BlurOverlay blur_overlay {
             vexpand: true;
+            
+            blur: bind blur_amount.value;
         }
     }
 }

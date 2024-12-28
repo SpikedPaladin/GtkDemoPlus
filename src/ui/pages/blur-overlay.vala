@@ -1,7 +1,7 @@
 [GtkTemplate (ui = "/me/paladin/Example/blur-page.ui")]
 public class BlurPage : Adw.NavigationPage {
     [GtkChild]
-    private unowned BlurOverlay blur_overlay;
+    public unowned BlurOverlay blur_overlay;
 }
 
 public class BlurOverlay : Gtk.Widget {
@@ -10,6 +10,14 @@ public class BlurOverlay : Gtk.Widget {
     
     private Graphene.Point card_position = { 10, 10 };
     private Graphene.Point? offset = null;
+    
+    private double _blur = 5;
+    public double blur { get { return _blur; }
+        set {
+            _blur = value;
+            queue_draw();
+        }
+    }
     
     construct {
         overflow = Gtk.Overflow.HIDDEN;
@@ -55,7 +63,7 @@ public class BlurOverlay : Gtk.Widget {
         if (!card.compute_bounds(this, out b)) {
             b = Graphene.Rect().init(0, 0, 0, 0);
         }
-        snapshot.push_blur(5);
+        snapshot.push_blur(blur);
         snapshot.push_rounded_clip(Gsk.RoundedRect().init_from_rect(b, 20));
         snapshot.append_node(node);
         snapshot.pop();
