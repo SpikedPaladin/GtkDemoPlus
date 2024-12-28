@@ -2,3 +2,15 @@ frame.front {
   border: 2px solid white;
   background-color: rgba(228, 0, 0, 0.8);
 }
+
+box.blur {
+    background-color: #e5e5f7;
+    background-image: linear-gradient(#444cf7 2px, transparent 2px), linear-gradient(90deg, #444cf7 2px, transparent 2px), linear-gradient(#444cf7 1px, transparent 1px), linear-gradient(90deg, #444cf7 1px, #e5e5f7 1px);
+    background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+    background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+}
+
+.blur-card {
+    border-radius: 20px;
+    background: alpha(white, 0.5);
+}

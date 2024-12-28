@@ -1,55 +1,74 @@
+[GtkTemplate (ui = "/me/paladin/Example/blur-page.ui")]
 public class BlurPage : Adw.NavigationPage {
-    
-    construct {
-        tag = "blur";
-        title = "Blur";
-        child = new BlurOverlay();
-    }
+    [GtkChild]
+    private unowned BlurOverlay blur_overlay;
 }
 
-public class BlurOverlay : Gtk.Box {
+public class BlurOverlay : Gtk.Widget {
     private Gtk.Box box;
-    private Gtk.Button button;
+    private Adw.Bin card;
+    
+    private Graphene.Point card_position = { 10, 10 };
+    private Graphene.Point? offset = null;
     
     construct {
+        overflow = Gtk.Overflow.HIDDEN;
         box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
-        box.append(button = new Gtk.Button.with_label("Not working rn"));
-        append(box);
+        box.add_css_class("blur");
+        box.set_parent(this);
+        card = new Adw.Bin() {
+            css_classes = { "blur-card" },
+            width_request = 200,
+            height_request = 100
+        };
+        card.set_parent(this);
+        
+        var drag = new Gtk.GestureDrag();
+        drag.drag_begin.connect((x, y) => {
+            var widget = pick(x, y, Gtk.PickFlags.DEFAULT);
+            
+            if (widget == card) {
+                offset = { card_position.x - (float) x, card_position.y - (float) y };
+            }
+        });
+        
+        drag.drag_update.connect((offset_x, offset_y) => {
+            if (offset != null) {
+                double x, y;
+                drag.get_start_point(out x, out y);
+                
+                card_position.x = ((float) (x + offset_x) + offset.x).clamp(0, get_width() - card.get_width());
+                card_position.y = ((float) (y + offset_y) + offset.y).clamp(0, get_height() - card.get_height());
+                queue_allocate();
+            }
+        });
+        
+        add_controller(drag);
     }
     
     public override void snapshot(Gtk.Snapshot snapshot) {
-        var child_snapshot = new Gtk.Snapshot();
-        snapshot_child(box, child_snapshot);
-        
-        var main_widget_node = child_snapshot.free_to_node();
-        
-        Graphene.Rect bounds;
-        if (!button.compute_bounds(box, out bounds)) {
-            bounds = Graphene.Rect().init(0, 0, 0, 0);
+        var sn = new Gtk.Snapshot();
+        snapshot_child(box, sn);
+        var node = sn.free_to_node();
+        snapshot.append_node(node);
+        Graphene.Rect b;
+        if (!card.compute_bounds(this, out b)) {
+            b = Graphene.Rect().init(0, 0, 0, 0);
         }
-        
         snapshot.push_blur(5);
-        snapshot.push_clip(bounds);
-        
-        snapshot.append_node(main_widget_node);
-        
+        snapshot.push_rounded_clip(Gsk.RoundedRect().init_from_rect(b, 20));
+        snapshot.append_node(node);
         snapshot.pop();
         snapshot.pop();
         
-        Cairo.RectangleInt rect = { 0, 0, get_width(), get_height() };
-        var clip = new Cairo.Region.rectangle(rect);
-        
-        rect.x = (int) Math.floor(bounds.origin.x);
-        rect.y = (int) Math.floor(bounds.origin.y);
-        
-        rect.width = (int) Math.ceil(bounds.origin.x + bounds.size.width - rect.x);
-        rect.width = (int) Math.ceil(bounds.origin.y + bounds.size.height - rect.y);
-        clip.subtract_rectangle(rect);
-        
-        snapshot.push_clip(bounds);
-        snapshot.append_node(main_widget_node);
-        snapshot.pop();
-        
-        snapshot_child(box, snapshot);
+        snapshot_child(card, snapshot);
+        return;
+    }
+    
+    public override void size_allocate(int width, int height, int baseline) {
+        box.allocate(get_width(), get_height(), baseline, null);
+        Gtk.Requisition _, natural_size;
+        card.get_preferred_size(out _, out natural_size);
+        card.allocate(natural_size.width, natural_size.height, baseline, new Gsk.Transform().translate(card_position));
     }
 }

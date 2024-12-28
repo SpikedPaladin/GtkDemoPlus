@@ -1,0 +1,17 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $BlurPage : Adw.NavigationPage {
+    tag: "blur";
+    title: "Blur Overlay";
+    
+    Box {
+        orientation: vertical;
+        
+        Adw.HeaderBar {}
+        
+        $BlurOverlay blur_overlay {
+            vexpand: true;
+        }
+    }
+}
