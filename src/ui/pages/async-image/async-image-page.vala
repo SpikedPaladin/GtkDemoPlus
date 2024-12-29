@@ -1,20 +1,24 @@
 [GtkTemplate (ui = "/me/paladin/Example/async-image-page.ui")]
 public class AsyncImagePage : Adw.NavigationPage {
     [GtkChild]
-    private unowned AsyncImage img;
+    private unowned Gtk.Picture pic;
     
     [GtkCallback]
     private void load_big() {
-        img.uri = "https://fakeimg.pl/3840x2160";
+        AsyncPaintable
+            .from_uri("https://fakeimg.pl/3840x2160")
+            .to_picture(pic);
     }
     
     [GtkCallback]
-    private void load_vala() {
-        img.uri = "https://fakeimg.pl/1920x1080";
+    private void load_small() {
+        AsyncPaintable
+            .from_uri("https://fakeimg.pl/1920x1080")
+            .to_picture(pic);
     }
     
     public override void unmap() {
-        img.set_paintable(null);
+        pic.paintable = null;
         base.unmap();
     }
 }

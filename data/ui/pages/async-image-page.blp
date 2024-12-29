@@ -20,24 +20,14 @@ template $AsyncImagePage : Adw.NavigationPage {
             }
             
             Button {
-                label: "Vala";
+                label: "Small";
                 
-                clicked => $load_vala();
+                clicked => $load_small();
             }
             
             Adw.Spinner {}
             
-            Box {
-                orientation: horizontal;
-                vexpand: true;
-                
-                Frame {
-                    height-request: 90;
-                    width-request: 180;
-                    
-                    $AsyncImage img {}
-                }
-            }
+            Picture pic {}
         }
     }
 }
