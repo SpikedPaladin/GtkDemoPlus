@@ -1,14 +1,14 @@
 public class BlurOverlay : Gtk.Widget, Gtk.Buildable {
-    private Gtk.Widget? _child = null;
+    private Gtk.Widget? _main_widget = null;
     private Gtk.Widget? _overlay = null;
     
-    private Graphene.Point card_position = { 10, 10 };
-    private Graphene.Point? offset = null;
-    
-    public Gtk.Widget? child { get { return _child; }
+    public Gtk.Widget? main_widget { get { return _main_widget; }
         set {
-            _child = value;
-            _child.insert_after(this, null);
+            if (_main_widget != null)
+                _main_widget.unparent();
+            
+            _main_widget = value;
+            _main_widget.insert_after(this, null);
         }
     }
     public Gtk.Widget? overlay { get { return _overlay; }
@@ -28,49 +28,28 @@ public class BlurOverlay : Gtk.Widget, Gtk.Buildable {
     
     construct {
         overflow = Gtk.Overflow.HIDDEN;
-        
-        var drag = new Gtk.GestureDrag();
-        drag.drag_begin.connect((x, y) => {
-            var widget = pick(x, y, Gtk.PickFlags.DEFAULT);
-            
-            if (widget == overlay) {
-                offset = { card_position.x - (float) x, card_position.y - (float) y };
-            }
-        });
-        
-        drag.drag_update.connect((offset_x, offset_y) => {
-            if (offset != null) {
-                double x, y;
-                drag.get_start_point(out x, out y);
-                
-                card_position.x = ((float) (x + offset_x) + offset.x).clamp(0, get_width() - overlay.get_width());
-                card_position.y = ((float) (y + offset_y) + offset.y).clamp(0, get_height() - overlay.get_height());
-                queue_allocate();
-            }
-        });
-        
-        add_controller(drag);
     }
     
     public override void snapshot(Gtk.Snapshot snapshot) {
-        if (child != null && overlay != null) {
-            var sn = new Gtk.Snapshot();
-            snapshot_child(child, sn);
-            var node = sn.free_to_node();
+        if (main_widget != null && overlay != null) {
+            var child_snapshot = new Gtk.Snapshot();
+            snapshot_child(main_widget, child_snapshot);
+            var node = child_snapshot.free_to_node();
             snapshot.append_node(node);
-            Graphene.Rect b;
-            if (!overlay.compute_bounds(this, out b)) {
-                b = Graphene.Rect().init(0, 0, 0, 0);
+            Graphene.Rect bounds;
+            if (!overlay.compute_bounds(this, out bounds)) {
+                bounds = Graphene.Rect().init(0, 0, 0, 0);
             }
             snapshot.push_blur(blur);
-            snapshot.push_rounded_clip(Gsk.RoundedRect().init_from_rect(b, 20));
+            
+            snapshot.push_clip(bounds);
             snapshot.append_node(node);
             snapshot.pop();
             snapshot.pop();
             snapshot_child(overlay, snapshot);
         } else {
-            if (child != null)
-                snapshot_child(child, snapshot);
+            if (main_widget != null)
+                snapshot_child(main_widget, snapshot);
             if (overlay != null)
                 snapshot_child(overlay, snapshot);
         }
@@ -79,13 +58,13 @@ public class BlurOverlay : Gtk.Widget, Gtk.Buildable {
     }
     
     public override void size_allocate(int width, int height, int baseline) {
-        if (child != null) {
-            child.allocate(get_width(), get_height(), 1, null);
+        if (main_widget != null && main_widget.visible) {
+            main_widget.allocate(get_width(), get_height(), 1, null);
         }
         
         Gtk.Requisition _, natural_size;
         overlay.get_preferred_size(out _, out natural_size);
-        overlay.allocate(natural_size.width, natural_size.height, 0, new Gsk.Transform().translate(card_position));
+        overlay.allocate(get_width(), natural_size.height, 0, null);
     }
     
     public void add_child(Gtk.Builder builder, Object child, string? type) {
@@ -95,7 +74,7 @@ public class BlurOverlay : Gtk.Widget, Gtk.Buildable {
                 overlay = widget;
                 return;
             } else if (type == null) {
-                this.child = widget;
+                this.main_widget = widget;
                 return;
             }
         }

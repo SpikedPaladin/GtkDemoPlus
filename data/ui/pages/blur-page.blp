@@ -4,11 +4,26 @@ using Adw 1;
 template $BlurPage : Adw.NavigationPage {
     tag: "blur";
     title: "Blur Overlay";
-    
-    Box {
-        orientation: vertical;
+    $BlurOverlay blur_overlay {
+        vexpand: true;
         
+        blur: bind blur_amount.value;
+        
+        ScrolledWindow {
+            vexpand: true;
+            hexpand: true;
+            
+            Box {
+                height-request: 4000;
+                hexpand: true;
+                
+                styles [ "blur" ]
+            }
+        }
+        
+        [overlay]
         Adw.HeaderBar {
+            styles [ "flat" ]
             
             [end]
             SpinButton blur_amount {
@@ -21,38 +36,6 @@ template $BlurPage : Adw.NavigationPage {
                     value: 5;
                 };
             }
-        }
-        
-        $BlurOverlay blur_overlay {
-            vexpand: true;
-            
-            blur: bind blur_amount.value;
-            
-            Box {
-                vexpand: true;
-                hexpand: true;
-                
-                styles [ "blur" ]
-            }
-            
-            [overlay]
-            Box {
-                spacing: 20;
-                Adw.Bin {
-                    width-request: 100;
-                    height-request: 100;
-                    
-                    styles [ "blur-card" ]
-                }
-                
-                Adw.Bin {
-                    width-request: 100;
-                    height-request: 100;
-                    
-                    styles [ "blur-card" ]
-                }
-            }
-            
         }
     }
 }
