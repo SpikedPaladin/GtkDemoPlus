@@ -27,6 +27,32 @@ template $BlurPage : Adw.NavigationPage {
             vexpand: true;
             
             blur: bind blur_amount.value;
+            
+            Box {
+                vexpand: true;
+                hexpand: true;
+                
+                styles [ "blur" ]
+            }
+            
+            [overlay]
+            Box {
+                spacing: 20;
+                Adw.Bin {
+                    width-request: 100;
+                    height-request: 100;
+                    
+                    styles [ "blur-card" ]
+                }
+                
+                Adw.Bin {
+                    width-request: 100;
+                    height-request: 100;
+                    
+                    styles [ "blur-card" ]
+                }
+            }
+            
         }
     }
 }

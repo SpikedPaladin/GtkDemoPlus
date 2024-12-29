@@ -1,6 +1,5 @@
 sources += files(
     'animation-page.vala',
-    'blur-overlay.vala',
     'reorderable-page.vala',
     'transition-page.vala',
     'shadertoy.vala',
@@ -9,3 +8,4 @@ sources += files(
 )
 
 subdir('async-image')
+subdir('blur')
