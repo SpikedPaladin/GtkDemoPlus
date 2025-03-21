@@ -3,6 +3,7 @@ sources += files(
     'reorderable-page.vala',
     'transition-page.vala',
     'shadertoy.vala',
+    'test-page.vala',
     'translations.vala',
     'interactive-map.vala'
 )

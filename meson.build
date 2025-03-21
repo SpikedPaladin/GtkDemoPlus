@@ -15,7 +15,7 @@ gnome = import('gnome')
 
 # Load custom vapi files
 add_project_arguments(
-    ['--vapidir', meson.current_source_dir() / 'vapi'],
+    ['--vapidir', meson.current_source_dir() / 'vapi', '--enable-experimental'],
     language: 'vala'
 )
 

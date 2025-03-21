@@ -14,6 +14,7 @@
         
         <!-- Reorderable List Page -->
         <file alias="blur-page.ui" preprocess="xml-stripblanks">ui/pages/blur-page.ui</file>
+        <file alias="test-page.ui" preprocess="xml-stripblanks">ui/pages/test-page.ui</file>
         <file alias="translations-page.ui" preprocess="xml-stripblanks">ui/pages/translations-page.ui</file>
         <file alias="async-image-page.ui" preprocess="xml-stripblanks">ui/pages/async-image-page.ui</file>
         <file alias="reorderable-page.ui" preprocess="xml-stripblanks">ui/pages/reorderable-page.ui</file>

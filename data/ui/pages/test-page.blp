@@ -1,0 +1,34 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $TestPage : Adw.NavigationPage {
+    tag: "test";
+    title: "Test List";
+    
+    Box {
+        orientation: vertical;
+        
+        Adw.HeaderBar {}
+        
+        Adw.Clamp {
+            maximum-size: 400;
+            vexpand: true;
+            valign: center;
+            
+            $ReorderableList list {
+                $ReorderableWidget {
+                    title: "Test 1";
+                }
+                $ReorderableWidget {
+                    title: "Test 2";
+                }
+                $ReorderableWidget {
+                    title: "Test 3";
+                }
+                $ReorderableWidget {
+                    title: "Test 4";
+                }
+            }
+        }
+    }
+}

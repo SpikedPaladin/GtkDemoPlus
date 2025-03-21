@@ -18,3 +18,8 @@ box.blur {
 .anim-box scale {
     padding-top: 0;
 }
+
+.test {
+    border-radius: 12px;
+    background: red;
+}

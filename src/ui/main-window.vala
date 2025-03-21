@@ -113,6 +113,11 @@ public class MainWindow : Adw.ApplicationWindow {
             has_page = false
         });
         
+        store.append(new Demo() {
+            tag = "test",
+            title = "Test List"
+        });
+        
         var data = new Demo() {
             tag = "sub",
             title = "Other",
@@ -163,6 +168,9 @@ public class MainWindow : Adw.ApplicationWindow {
      * are registered in GObject system
      */
     public static void ensure_pages() {
+        typeof(TestPage).ensure();
+        typeof(ReorderableList).ensure();
+        typeof(ReorderableWidget).ensure();
         typeof(AnimationPage).ensure();
         typeof(TransitionPage).ensure();
         typeof(ShaderToyPage).ensure();
