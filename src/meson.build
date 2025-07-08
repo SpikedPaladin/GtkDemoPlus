@@ -1,7 +1,8 @@
 deps = [
     dependency('gtk4'),
     dependency('libadwaita-1'),
-    dependency('gl')
+    dependency('gl'),
+    dependency('epoxy')
 ]
 
 sources = files(
@@ -13,7 +14,7 @@ subdir('ui')
 
 app = executable(
     output,
-    
+
     resources,
     sources,
     dependencies: deps,
