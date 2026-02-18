@@ -159,6 +159,10 @@ public class MainWindow : Adw.ApplicationWindow {
             tag = "async_image",
             title = "Async Image"
         });
+        sub_store.append(new Demo() {
+            tag = "resize-animation",
+            title = "Resize Animation"
+        });
         
         return store;
     }
@@ -180,5 +184,6 @@ public class MainWindow : Adw.ApplicationWindow {
         typeof(TransitionPage).ensure();
         typeof(TranslationsPage).ensure();
         typeof(AsyncImagePage).ensure();
+        typeof(ResizeAnimationPage).ensure();
     }
 }
